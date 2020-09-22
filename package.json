@@ -1,0 +1,21 @@
+{
+  "name": "testing",
+  "version": "0.0.1",
+  "description": "Testing observables with marbles",
+  "main": "app.js",
+  "scripts": {
+    "test": "jasmine",
+    "build": "tsc",
+    "start": "tsc && node src/app.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine": "^3.6.1",
+    "jasmine-marbles": "^0.6.0",
+    "node": "^14.8.0",
+    "rxjs": "^6.6.3",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.2"
+  }
+}
