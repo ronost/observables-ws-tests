@@ -50,8 +50,8 @@ describe('testObservable test', () => {
             // assert deep equals callback https://rxjs-dev.firebaseapp.com/api/testing/TestScheduler
             // epectObservable() only prepares and converts Observable values to something comparable (an array of actual and expected values).
             // It's this callback's responsibility to assert deep equality using appropriate test.
-            console.log('actual: ', actual);
-            console.log('expected: ', expected);
+            //console.log('actual: ', actual);
+            //console.log('expected: ', expected);
             expect(actual).toEqual(expected);
         });
     });
@@ -59,6 +59,28 @@ describe('testObservable test', () => {
     afterEach(() => {
         scheduler.flush();
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
 
     describe('test case - synchronous (same frame): ', () => {
         beforeEach(() => {
@@ -88,9 +110,29 @@ describe('testObservable test', () => {
                 const expectedValues = {a: 2, b: 4, c: 6};
             
                 expectObservable(testObservables.getObservable1MultipliedByTwo()).toBe(expectedDiagram, expectedValues);
-              });
+            });
         });
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     describe('test case - asynchronous (multiple frames): ', () => {
         beforeEach(() => {
@@ -102,9 +144,10 @@ describe('testObservable test', () => {
         });
 
         it('subscribe and assert pattern', done => {
+            const expected = [2,4,6];
             const results = [];
             testObservables.getObservable1MultipliedByTwo().subscribe(value => results.push(value), () => {}, () => {
-                expect(results).toEqual([2,4,6]);
+                expect(results).toEqual(expected);
                 done();    
             });
         });
@@ -118,6 +161,26 @@ describe('testObservable test', () => {
             });
         });
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     describe('test case - mock observable and compare testSceduler to jasmine-marbles: ', () => {
         it('marble testing with diagram pattern', () => {
@@ -139,6 +202,36 @@ describe('testObservable test', () => {
         });
     });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     describe('test case - hot observables and subscriptions: ', () => {
         it('should showcase multiple subscriptions to hot observable', () => {
             scheduler.run(({ hot, expectObservable, expectSubscriptions }) => {
@@ -149,11 +242,11 @@ describe('testObservable test', () => {
                 const expectedValues1 = {a: 1};
 
                 const subscription2 = '--^-----!';
-                const expectedDiagram2 = '---b-c-d-';
+                const expectedDiagram2 = '3ms b-c-d-';
                 const expectedValues2 = {b: 2, c: 3, d: 4};
 
                 const subscription3 = '--------^';
-                const expectedDiagram3 = '---------e-f-g';
+                const expectedDiagram3 = '---------e-f-g-';
                 const expectedValues3 = {e: 5, f: 6, g: 7};
 
                 expectObservable(stream$, subscription1).toBe(expectedDiagram1, expectedValues1);
@@ -165,11 +258,37 @@ describe('testObservable test', () => {
         });
     });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     describe('test case - showcase testing errors: ', () => {
         it('marble testing with diagram pattern', () => {
             scheduler.run(({ cold, expectObservable }) => {
                 testObservables.observable1$ = cold('-a-#-b-c', { a: 1, b: 2, c: 3 }, new Error('some error'));
-                const expectedDiagram = '-a-#';
+                const expectedDiagram = '1ms a 1ms #';
                 const expectedValues = {a: 2};
                 const expectedError = new Error('some error');
             
